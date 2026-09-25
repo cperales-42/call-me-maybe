@@ -2,7 +2,7 @@ from __future__ import annotations
 import json
 
 from .models import FunctionDefinition, TestCase, FunctionCallResult
-
+from pydantic import BaseModel
 
 class IOUtils(BaseModel):
     functions_definition_path: str

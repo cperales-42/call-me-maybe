@@ -3,9 +3,13 @@ name = "call-me-maybe"
 version = "0.1.0"
 requires-python = ">=3.10"
 dependencies = [
+    "llm-sdk",
     "numpy>=2.0",
     "pydantic>=2.0",
 ]
+
+[tool.uv.sources]
+llm-sdk = { path = "llm_sdk" }
 
 [dependency-groups]
 dev = ["flake8", "mypy"]
