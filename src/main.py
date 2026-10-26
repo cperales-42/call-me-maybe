@@ -8,7 +8,6 @@ import sys
 from importlib import import_module
 from typing import cast
 
-from .batch import BatchProcessor
 from .cache import ResultCache
 from .generator import generate_prompt
 from .grammar import Grammar
@@ -163,7 +162,6 @@ def run(
     tests_path: str,
     output_path: str,
     use_cache: bool = False,
-    batch_size: int = 1,
     visualize: bool = False,
     *,
     model: ModelProtocol | None = None,
@@ -178,7 +176,6 @@ def run(
         tests_path: Path to the JSON test cases.
         output_path: Path where generated results will be written.
         use_cache: Whether to use the persistent result cache.
-        batch_size: Number of cases grouped per processing batch.
         visualize: Whether to print token-selection events.
         model: Optional pre-built model for testing or embedding.
         tokenizer: Optional pre-built tokenizer.
@@ -194,8 +191,6 @@ def run(
     """
     if max_iter <= 0:
         raise ValueError("max_iter must be positive")
-    if batch_size < 1:
-        raise ValueError("batch_size must be at least 1")
 
     parse_utils = IOUtils(
         functions_definition_path=funcs_path,
@@ -243,8 +238,7 @@ def run(
             cache.set(functions_hash, case.prompt, result)
         return result
 
-    processor = BatchProcessor(batch_size=batch_size)
-    results = processor.process(test_cases, process_case)
+    results = [process_case(case) for case in test_cases]
     parse_utils.write_output(results)
     return results
 
@@ -287,12 +281,6 @@ def main() -> int:
         help="Disable the result cache (default).",
     )
     parser.add_argument(
-        "--batch-size",
-        type=int,
-        default=1,
-        help="Number of test cases grouped per processing batch.",
-    )
-    parser.add_argument(
         "--visualize",
         "--cli",
         dest="visualize",
@@ -308,7 +296,6 @@ def main() -> int:
             args.input,
             args.output,
             use_cache=args.cache,
-            batch_size=args.batch_size,
             visualize=args.visualize,
         )
     except KeyboardInterrupt:
