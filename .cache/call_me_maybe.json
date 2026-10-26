@@ -1,0 +1,87 @@
+{
+  "5022e8785ba77c6518421c481d452988d115bef71e95abd768f9ccf1c3de3804": {
+    "prompt": "What is the product of 3 and 5?",
+    "name": "fn_multiply_numbers",
+    "parameters": {
+      "a": 3.0,
+      "b": 5.0
+    }
+  },
+  "d85a16682880bd8d22f92d371ca8f4fb03813e0dccec6e40be34a3bbf884f7a8": {
+    "prompt": "What is the product of 12 and 4?",
+    "name": "fn_multiply_numbers",
+    "parameters": {
+      "a": 12.0,
+      "b": 4.0
+    }
+  },
+  "02da519bac8289f84e2d645fc78ce6179d71190eea5bf98afff5f7c37e5d2166": {
+    "prompt": "Is 4 an even number?",
+    "name": "fn_is_even",
+    "parameters": {
+      "n": 4
+    }
+  },
+  "f762d0c6653770c5af0a08d3e41635e4f538ff041c62602e0a1ade58a88f2aa6": {
+    "prompt": "Is 7 an even number?",
+    "name": "fn_is_even",
+    "parameters": {
+      "n": 7
+    }
+  },
+  "d023be88d268b5513f28a19be3fce33bd823a3d5ba3cd0f4c88593b9289e7fc7": {
+    "prompt": "Calculate compound interest on 1234567.89 at 0.0375 rate for 23 years",
+    "name": "fn_calculate_compound_interest",
+    "parameters": {
+      "principal": 1234567.89,
+      "rate": 0.0375,
+      "years": 23
+    }
+  },
+  "1524e1f423b1e99ec3c0372f93f554ff19d9918455aa4f6b1bee1be6b1747f0c": {
+    "prompt": "Execute SQL query 'SELECT * FROM users' on the production database",
+    "name": "fn_execute_sql_query",
+    "parameters": {
+      "query": "SELECT * FROM users",
+      "database": "production"
+    }
+  },
+  "f5a1d7b8256c5941cdc778874a15fa3d25bb33026c03d1f1e218daed9584cee7": {
+    "prompt": "Run the query 'INSERT INTO logs VALUES (1, 2, 3)' on the system database",
+    "name": "fn_execute_sql_query",
+    "parameters": {
+      "query": "INSERT INTO logs VALUES (1, 2, 3)",
+      "database": "system"
+    }
+  },
+  "a6ec994de7a5b7507aec64b1f818b5daa4c26f9c6c54e50cdb10e4d2b94294a0": {
+    "prompt": "Read the file at /home/user/data.json with utf-8 encoding",
+    "name": "fn_read_file",
+    "parameters": {
+      "path": " /home/user/data.json",
+      "encoding": "utf-8"
+    }
+  },
+  "9bf25a955236ad84407fa0f41f8f4ac77fe7a961a46ba4c4072160bbd47bff29": {
+    "prompt": "Read C:\\Users\\john\\config.ini with latin-1 encoding",
+    "name": "fn_read_file",
+    "parameters": {
+      "path": "C:/Users/john/config.ini",
+      "encoding": "latin-1"
+    }
+  },
+  "d1f7ea628d1bd422bfd6c7cc593e68feede7dd8de8efb19a9c5ef6ea7053270d": {
+    "prompt": "Format template: Hello {user}'s profile!",
+    "name": "fn_format_template",
+    "parameters": {
+      "template": "Hello {user}'s profile!"
+    }
+  },
+  "a5987f731bd111868cf512daa61b7d50076f3dfae63574636478aabf8f863d75": {
+    "prompt": "Format template: Say \"hello\" to {name}",
+    "name": "fn_format_template",
+    "parameters": {
+      "template": "Say hello to {name}"
+    }
+  }
+}
