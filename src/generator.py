@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Callable, Literal
 
 import numpy as np
+from numpy.typing import NDArray
 from pydantic import BaseModel
 
 from .grammar import Grammar
@@ -27,7 +28,7 @@ class GenerationEvent(BaseModel):
 GenerationObserver = Callable[[GenerationEvent], None]
 
 
-def _select_singleton(mask: np.ndarray) -> int:
+def _select_singleton(mask: NDArray[np.bool_]) -> int:
     """Return the identifier of the only allowed token.
 
     Args:

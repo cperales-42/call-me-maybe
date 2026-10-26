@@ -7,6 +7,7 @@ import re
 from typing import Any
 
 import numpy as np
+from numpy.typing import NDArray
 from pydantic import BaseModel, PrivateAttr
 
 from .tokenizer import token_key_to_text
@@ -30,10 +31,10 @@ class Vocabulary(BaseModel):
     _direct_map: list[str | None] = PrivateAttr()
     _inverse_map: dict[str, int] = PrivateAttr()
     _symbols: dict[str, int] = PrivateAttr()
-    _structural_mask: np.ndarray = PrivateAttr()
-    _secure_mask: np.ndarray = PrivateAttr()
-    _numeric_mask: np.ndarray = PrivateAttr()
-    _number_piece_mask: np.ndarray = PrivateAttr()
+    _structural_mask: NDArray[np.bool_] = PrivateAttr()
+    _secure_mask: NDArray[np.bool_] = PrivateAttr()
+    _numeric_mask: NDArray[np.bool_] = PrivateAttr()
+    _number_piece_mask: NDArray[np.bool_] = PrivateAttr()
 
     def __init__(self, vocab_path: str, logits_size: int) -> None:
         """Initialize and validate a model vocabulary.
@@ -239,7 +240,7 @@ class Vocabulary(BaseModel):
         """
         return set(self._symbols.values())
 
-    def get_structural_mask(self) -> np.ndarray:
+    def get_structural_mask(self) -> NDArray[np.bool_]:
         """Return the mask for structural JSON symbols.
 
         Returns:
@@ -247,7 +248,7 @@ class Vocabulary(BaseModel):
         """
         return self._structural_mask
 
-    def get_secure_mask(self) -> np.ndarray:
+    def get_secure_mask(self) -> NDArray[np.bool_]:
         """Return the mask for safe string-content tokens.
 
         Returns:
@@ -256,7 +257,7 @@ class Vocabulary(BaseModel):
         """
         return self._secure_mask
 
-    def get_numeric_mask(self) -> np.ndarray:
+    def get_numeric_mask(self) -> NDArray[np.bool_]:
         """Return the mask for complete JSON-number tokens.
 
         Returns:
@@ -264,7 +265,7 @@ class Vocabulary(BaseModel):
         """
         return self._numeric_mask
 
-    def get_number_piece_mask(self) -> np.ndarray:
+    def get_number_piece_mask(self) -> NDArray[np.bool_]:
         """Return the mask for tokens made only of number characters.
 
         Returns:

@@ -124,8 +124,10 @@ def test_run_can_use_visualization(
         tokenizer=model.tokenizer,
     )
     captured = capsys.readouterr()
-    assert "[visualize] prompt: Greet shrek" in captured.out
-    assert "[visualize] result:" in captured.out
+    assert "[visualize]" not in captured.out
+    # The prompt appears once in its own panel and once in the JSON document.
+    assert captured.out.count("Greet shrek") >= 2
+    assert " allowed" in captured.out
     assert '"name": "fn_greet"' in captured.out
 
 

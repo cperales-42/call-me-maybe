@@ -7,6 +7,7 @@ from math import isfinite
 from typing import Any, Literal, NamedTuple
 
 import numpy as np
+from numpy.typing import NDArray
 from pydantic import BaseModel, PrivateAttr
 
 from .models import FunctionDefinition, SUPPORTED_PARAMETER_TYPES
@@ -173,10 +174,10 @@ class Grammar(BaseModel):
     _pieces: list[str | None] = PrivateAttr()
     _piece_set: set[str] = PrivateAttr()
     _quote_token_ids: tuple[int, ...] = PrivateAttr()
-    _piece_lengths: np.ndarray = PrivateAttr()
-    _piece_digit_counts: np.ndarray = PrivateAttr()
-    _secure_mask: np.ndarray = PrivateAttr()
-    _number_piece_mask: np.ndarray = PrivateAttr()
+    _piece_lengths: NDArray[np.int64] = PrivateAttr()
+    _piece_digit_counts: NDArray[np.int64] = PrivateAttr()
+    _secure_mask: NDArray[np.bool_] = PrivateAttr()
+    _number_piece_mask: NDArray[np.bool_] = PrivateAttr()
     _max_piece_length: int = PrivateAttr()
     _prefix_cache: dict[str, tuple[int, ...]] = PrivateAttr()
     _key_target: str = PrivateAttr()
@@ -541,7 +542,7 @@ class Grammar(BaseModel):
             return self._sym[","]
         return self._sym["}"]
 
-    def _limited_string_mask(self, remaining_chars: int) -> np.ndarray:
+    def _limited_string_mask(self, remaining_chars: int) -> NDArray[np.bool_]:
         """Build a string-token mask within a character budget.
 
         Args:
@@ -558,7 +559,7 @@ class Grammar(BaseModel):
             & (self._piece_lengths <= remaining_chars)
         )
 
-    def mask_for_next(self) -> np.ndarray:
+    def mask_for_next(self) -> NDArray[np.bool_]:
         """Build the set of tokens allowed by the current parser state.
 
         Returns:
