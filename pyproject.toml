@@ -12,7 +12,11 @@ dependencies = [
 llm-sdk = { path = "llm_sdk" }
 
 [dependency-groups]
-dev = ["flake8", "mypy"]
+dev = [
+    "flake8",
+    "mypy",
+    "pytest>=9.1.1",
+]
 
 [build-system]
 requires = ["setuptools"]
